@@ -1,0 +1,17 @@
+CREATE TABLE IF NOT EXISTS students (
+    student_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    course TEXT NOT NULL,
+    year INTEGER NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    cgpa REAL CHECK(cgpa >= 0.0 AND cgpa <= 10.0),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS results (
+    result_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    student_id INTEGER REFERENCES students(student_id) ON DELETE CASCADE,
+    subject TEXT NOT NULL,
+    marks INTEGER NOT NULL,
+    grade TEXT NOT NULL
+);
